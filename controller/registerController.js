@@ -14,21 +14,3 @@ exports.register = async(req,res)=>{
     })
 }
 
-// const register = async (req, res) => {
-//     try {
-    
-//       const user = await User.create({
-//         email: req.body.email,
-//         password: req.body.password,
-//         isAdmin: 0,
-        
-//       });
-//       console.log(user);
-//       res.status(201).json(user);
-//     } catch (err) {
-//       console.error(err);
-//       res.status(500).send('Server error');
-//     }
-//   };
-
-//   module.exports={register}

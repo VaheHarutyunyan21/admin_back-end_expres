@@ -8,7 +8,7 @@ app.use(express.json())
 // });
 
 auth_routes.register_routes(app)
-
+auth_routes.login_routes(app)
 
 
 app.listen(5000, () => {

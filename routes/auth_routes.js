@@ -1,5 +1,5 @@
 const authRegister=require("../controller/registerController")
-
+const authLogin=require('../controller/loginController')
 
 
 exports.register_routes=(app)=> {
@@ -8,3 +8,9 @@ exports.register_routes=(app)=> {
 
 }
 
+
+exports.login_routes=(app)=> {
+
+    app.post('/login',authLogin.loginController)
+
+}
