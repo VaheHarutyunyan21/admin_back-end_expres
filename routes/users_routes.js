@@ -1,7 +1,5 @@
 const users_controller = require('../controller/users_controller')
-
-
-
+const adminMidlweare = require("../middleware/adminToken_middleware")
 
 
 function create_users_routes(app) {

@@ -16,7 +16,7 @@ function generateAccessToken(id,email,isAdmin) {
         const email = req.body.email;
         const password1=req.body.password;
         const password = CryptoJS.SHA256(password1).toString();
-        User.findOne ({ where: { email} })
+        User.findOne ({ where: {email} })
         .then((prod)=>{
             if (prod.email == email && prod.password == password) {
                 let token = generateAccessToken(prod.id,prod.email,prod.isAdmin)
