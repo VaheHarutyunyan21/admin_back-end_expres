@@ -1,51 +1,53 @@
 // 'use strict';
-// const { Model} = require('sequelize');
+// const {
+//   Model
+// } = require('sequelize');
 // module.exports = (sequelize, DataTypes) => {
-//   class Product extends Model {
+//   class Cart extends Model {
 //     /**
 //      * Helper method for defining associations.
 //      * This method is not a part of Sequelize lifecycle.
 //      * The `models/index` file will call this method automatically.
 //      */
 //     static associate(models) {
-//       Product.belongsTo(models.Category)
+//       // define association here
 //     }
 //   }
-//   Product.init({
-//     name: DataTypes.STRING,
-//     description: DataTypes.STRING,
-//     price: DataTypes.INTEGER,
-//     categoryId: DataTypes.INTEGER
+//   Cart.init({
+//     id: DataTypes.INTEGER,
+//     userId: DataTypes.INTEGER,
+//     productId: DataTypes.INTEGER
 //   }, {
 //     sequelize,
-//     modelName: 'Product',
+//     modelName: 'Cart',
 //   });
-//   return Product;
+//   return Cart;
 // };
-
 'use strict';
 const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Product extends Model {
+  class Cart extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Product.belongsTo(models.Category, {foreignKey:'categoryId', key:'id'});
+      Cart.belongsTo(models.User, {foreignKey:'userId', key:'id'});
+      Cart.belongsTo(models.Product, {foreignKey:'productId',as:"productData", key:'id'});
+      
     }
   }
-  Product.init({
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    price: DataTypes.INTEGER,
-    categoryId: DataTypes.INTEGER,
+  Cart.init({
+    userId:{type:DataTypes.INTEGER,allowNull:false},
+    productId: {type:DataTypes.INTEGER,allowNull:false},
+    quantity:{type:DataTypes.INTEGER}
+
   }, {
     sequelize,
-    modelName: 'Product',
+    modelName: 'Cart',
   });
-  return Product;
+  return Cart;
 };

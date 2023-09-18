@@ -10,11 +10,12 @@ function generateAccessToken(id,email,isAdmin) {
     return jwt.sign({id,email,isAdmin},SECRET, { expiresIn: '1h' });
   }
 
-
-
     exports.loginController = async(req,res)=>{
         const email = req.body.email;
         const password1=req.body.password;
+        if (!email && !password1) {
+            return res.status(403).json('Validation error')
+        }
         const password = CryptoJS.SHA256(password1).toString();
         User.findOne ({ where: {email} })
         .then((prod)=>{

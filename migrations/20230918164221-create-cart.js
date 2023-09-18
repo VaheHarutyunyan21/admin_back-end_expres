@@ -2,25 +2,18 @@
 // /** @type {import('sequelize-cli').Migration} */
 // module.exports = {
 //   async up(queryInterface, Sequelize) {
-//     await queryInterface.createTable('Products', {
+//     await queryInterface.createTable('Carts', {
 //       id: {
 //         allowNull: false,
 //         autoIncrement: true,
 //         primaryKey: true,
 //         type: Sequelize.INTEGER
 //       },
-//       name: {
-//         type: Sequelize.STRING
-//       },
-//       description: {
-//         type: Sequelize.STRING
-//       },
-//       price: {
+//       userId: {
 //         type: Sequelize.INTEGER
 //       },
-//       categoryId: {
-//         type: Sequelize.INTEGER,
-//         references:{model:'Categories', key:'id'}
+//       productId: {
+//         type: Sequelize.INTEGER
 //       },
 //       createdAt: {
 //         allowNull: false,
@@ -33,36 +26,39 @@
 //     });
 //   },
 //   async down(queryInterface, Sequelize) {
-//     await queryInterface.dropTable('Products');
+//     await queryInterface.dropTable('Carts');
 //   }
 // };
+
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Products', {
+    await queryInterface.createTable('Carts', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      description: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      price: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-      },
-      categoryId: {
-        type: Sequelize.INTEGER,
-        references:{model:'Categories', key:'id'}
-      },
+        references: {
+          model: 'Users',
+          key: 'id'
+        }},
+        productId: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: 'Products',
+            key: 'id'
+          }},
+          quantity:{
+            type: Sequelize.INTEGER
+          },
+        
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -74,6 +70,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Products');
+    await queryInterface.dropTable('Carts');
   }
 };
